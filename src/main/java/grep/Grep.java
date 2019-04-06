@@ -29,13 +29,13 @@ import org.kohsuke.args4j.Option;
  *
  */
 
-public class Grep {
+class Grep {
 
     /** [-i]
      * флаг игнорирования регистра
      * игнорирует регистр слов
      */
-    @Option(name = "-i", usage = "enables case ignore")
+    @Option(name = "-i", usage = "enables case ignore", forbids = {"-r"})
     private boolean fi;
 
     /** [-v]
@@ -49,7 +49,7 @@ public class Grep {
      * флаг регулярного выражения
      * вместо слова задаёт регулярное выражение для поиска
      */
-    @Option(name = "-r", usage = "allows you to specify a regular expression for filtering")
+    @Option(name = "-r", usage = "allows you to specify a regular expression for filtering", forbids = {"-i"})
     private boolean fr;
 
     /**
