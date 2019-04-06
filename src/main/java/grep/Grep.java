@@ -114,26 +114,19 @@ class Grep {
         // из массива аргументов получаем регулярное выражение
         String word = wordAndFile.get(0);
 
-        List<String> result = new LinkedList<String>();
-        String regex = word;
+        List<String> result = new LinkedList<>();
 
         // проходимся по каждый строке для последующей фильтрации
         for(String line: lines){
-            String newLine = line;
-
-            // в случае наличия флага игнорирования регистра переводим newLine в нижний регистр
-            if (fi)
-                newLine = newLine.toLowerCase();
-
             // в случае отсутствия флага инверсии условия фильтрации добавляем в result строки,
             // соответствующие регулярному выражению
             // в случае наличия флага  инверсии условия фильтрации добавляем в result строки,
             // не соответствующие регулярному выражению
             if (!fv) {
-                if (Pattern.compile(regex).matcher(newLine).matches())
+                if (Pattern.compile(word).matcher(line).matches())
                     result.add(line);
             } else {
-                if (!Pattern.compile(regex).matcher(newLine).matches())
+                if (!Pattern.compile(word).matcher(line).matches())
                     result.add(line);
             }
         }
@@ -158,7 +151,7 @@ class Grep {
         if (fi)
             word = word.toLowerCase();
 
-        List<String> result = new LinkedList<String>();
+        List<String> result = new LinkedList<>();
 
         // проходимся по каждый строке для последующей фильтрации
         for(String line: lines) {

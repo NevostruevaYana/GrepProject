@@ -1,77 +1,119 @@
 package grep;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 class GrepTest {
 
+    private ByteArrayOutputStream myOut = new ByteArrayOutputStream();
+
     @Test
     void test1() {
+        System.setOut(new PrintStream(myOut));
+
         String[] argsEmpty = {};
-        Main.main(argsEmpty); //should return description string
+        Main.main(argsEmpty);
+
+        final String standardOutput = myOut.toString();
+        assertEquals(standardOutput, "Enter a string like : grep -flags([-r] - regex, " +
+                "[-i] - ignore case, [-v] - return lines that NOT matches) words file\r\n");
     }
 
     @Test
     void test2() {
+        System.setOut(new PrintStream(myOut));
+
         String[] args2 = {"src\\test\\java\\grep\\test"};
-        Main.main(args2); //should return description string
+        Main.main(args2);
+
+        final String standardOutput = myOut.toString();
+        assertEquals(standardOutput, "Enter a string like : grep -flags([-r] - regex, " +
+                "[-i] - ignore case, [-v] - return lines that NOT matches) words file\r\n");
     }
 
     @Test
     void test3() {
-        String[] args1 = {"rfr", "src\\test\\java\\grep\\test"};
-        Main.main(args1); //should return "rfr sdg ghjkl"
+        System.setOut(new PrintStream(myOut));
+
+        String[] args3 = {"rfr", "src\\test\\java\\grep\\test"};
+        Main.main(args3);
+
+        final String standardOutput = myOut.toString();
+        assertEquals(standardOutput, "rfr sdg ghjkl\r\n");
     }
 
     @Test
     void test4() {
-        String[] args1 = {"-i", "rFr", "src\\test\\java\\grep\\test"};
-        Main.main(args1); //should return "rfr sdg ghjkl"
-        //              "dxfghp RfR jkf"
+        System.setOut(new PrintStream(myOut));
+
+        String[] args4 = {"-i", "rFr", "src\\test\\java\\grep\\test"};
+        Main.main(args4);
+
+        final String standardOutput = myOut.toString();
+        assertEquals(standardOutput, "rfr sdg ghjkl\r\ndxfghp RfR jkf\r\n");
     }
 
     @Test
     void test5() {
-        String[] args3 = {"-v", "-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
-        Main.main(args3); //should return "zsd sdftsdv fbg"
-        //              "dftg"
-        //              "fgkfl rrr"
+        System.setOut(new PrintStream(myOut));
+
+        String[] args5 = {"-v", "-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
+        Main.main(args5);
+
+        final String standardOutput = myOut.toString();
+        assertEquals(standardOutput, "zsd sdftsdv fbg\r\ndftg\r\nfgkfl rrr\r\n");
     }
 
     @Test
     void test6() {
-        String[] args1 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
-        Main.main(args1); //should return "dftg"
-        //              "dxfghp RfR jkf"
-        //              "dsjnvkdv dvjnfdrfr"
+        System.setOut(new PrintStream(myOut));
+
+        String[] args6 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
+        Main.main(args6);
     }
 
     @Test
     void test7() {
-        String[] args1 = {"-v", "sdg", "src\\test\\java\\grep\\test"};
-        Main.main(args1); //should return "zsd sdftsdv fbg"
-        //              "dftg"
-        //              "dxfghp RfR jkf"
-        //              "dsjnvkdv dvjnfdrfr"
-        //              "fgkfl rrr"
+        System.setOut(new PrintStream(myOut));
+
+        String[] args7 = {"-v", "sdg", "src\\test\\java\\grep\\test"};
+        Main.main(args7);
+
+        final String standardOutput = myOut.toString();
+        assertEquals(standardOutput, "zsd sdftsdv fbg\r\ndftg\r\ndxfghp RfR jkf" +
+                "\r\ndsjnvkdv dvjnfdrfr\r\nfgkfl rrr\r\n");
     }
 
     @Test
     void test8() {
-        String[] args2 = {"dfg", "fgh", "src\\test\\java\\grep\\test"};
-        Main.main(args2); //should return "There should be 2 arguments: word file" message
+        System.setOut(new PrintStream(myOut));
+
+        String[] args8 = {"dfg", "fgh", "src\\test\\java\\grep\\test"};
+        Main.main(args8); //should return "There should be 2 arguments: word file" message
+
+        final String standardOutput = myOut.toString();
+        assertEquals(standardOutput, "");
     }
 
     @Test
     void test9() {
-        String[] args2 = {"fgh", "src\\test\\java\\grep\\test.txt"};
-        Main.main(args2); //should return "The file path is invalid, the object C://Users//test.tt
+        System.setOut(new PrintStream(myOut));
+
+        String[] args9 = {"fgh", "src\\test\\java\\grep\\test.txt"};
+        Main.main(args9); //should return "The file path is invalid, the object C://Users//test.tt
         // is not a file, or the file does not exist" message
     }
 
     @Test
     void test10() {
-        String[] args2 = {"fgh", "null"};
-        Main.main(args2); //should return "The file path is invalid, the object null
+        System.setOut(new PrintStream(myOut));
+
+        String[] args10 = {"fgh", "null"};
+        Main.main(args10); //should return "The file path is invalid, the object null
         // is not a file, or the file does not exist" message
     }
 }

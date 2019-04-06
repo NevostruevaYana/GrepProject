@@ -1,10 +1,7 @@
 package grep;
 
-import java.io.IOException;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
 /**
