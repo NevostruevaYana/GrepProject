@@ -72,16 +72,27 @@ class GrepTest {
     void test6() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args6 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
+        String[] args6 = {"-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
         Main.main(args6);
+
+        final String standardOutput = myOut.toString();
+        assertEquals(standardOutput, "rfr sdg ghjkl\r\ndxfghp RfR jkf\r\ndsjnvkdv dvjnfdrfr\r\n");
     }
 
     @Test
     void test7() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args7 = {"-v", "sdg", "src\\test\\java\\grep\\test"};
+        String[] args7 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
         Main.main(args7);
+    }
+
+    @Test
+    void test8() {
+        System.setOut(new PrintStream(myOut));
+
+        String[] args8 = {"-v", "sdg", "src\\test\\java\\grep\\test"};
+        Main.main(args8);
 
         final String standardOutput = myOut.toString();
         assertEquals(standardOutput, "zsd sdftsdv fbg\r\ndftg\r\ndxfghp RfR jkf" +
@@ -89,31 +100,31 @@ class GrepTest {
     }
 
     @Test
-    void test8() {
+    void test9() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args8 = {"dfg", "fgh", "src\\test\\java\\grep\\test"};
-        Main.main(args8); //should return "There should be 2 arguments: word file" message
+        String[] args9 = {"dfg", "fgh", "src\\test\\java\\grep\\test"};
+        Main.main(args9); //should return "There should be 2 arguments: word file" message
 
         final String standardOutput = myOut.toString();
         assertEquals(standardOutput, "");
     }
 
     @Test
-    void test9() {
+    void test10() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args9 = {"fgh", "src\\test\\java\\grep\\test.txt"};
-        Main.main(args9); //should return "The file path is invalid, the object C://Users//test.tt
+        String[] args10 = {"fgh", "src\\test\\java\\grep\\test.txt"};
+        Main.main(args10); //should return "The file path is invalid, the object C://Users//test.tt
         // is not a file, or the file does not exist" message
     }
 
     @Test
-    void test10() {
+    void test11() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args10 = {"fgh", "null"};
-        Main.main(args10); //should return "The file path is invalid, the object null
+        String[] args11 = {"fgh", "null"};
+        Main.main(args11); //should return "The file path is invalid, the object null
         // is not a file, or the file does not exist" message
     }
 }
