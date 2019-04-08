@@ -56,8 +56,11 @@ class Grep {
      * получает параметры командной строки, отличные от опций
      * (слово или регулярное выражение и имя входного файла)
      */
-    @Argument
-    private List<String> wordAndFile;
+    @Argument(index = 0)
+    private String word;
+
+    @Argument(index = 1)
+    private String file;
 
     /**
      * Проверка корректности ввода аргументов
@@ -65,10 +68,7 @@ class Grep {
      * @throws IllegalArgumentException
      *         Если размер {@code wordAndFile} не равен 2
      */
-    private void arguments(){
-        if(wordAndFile.size() != 2)
-            throw new IllegalArgumentException("There should be 2 arguments: word file");
-    }
+
 
     /**
      * Получение отфильтрованного заданными параметрами списка строк входного файла
@@ -79,8 +79,8 @@ class Grep {
     List<String> getFilteredFile() throws IOException {
 
         // проверка правильности ввода аргументов
-        arguments();
-        String inputFile = wordAndFile.get(1);
+
+        String inputFile = file;
         if (!new File(inputFile).exists() || !new File(inputFile).isFile())
             throw new IllegalArgumentException("The file path is invalid, the object " +
                     inputFile + " is not a file, or the file does not exist");
@@ -112,7 +112,7 @@ class Grep {
     private List<String> grepRegex(List<String> lines) {
 
         // из массива аргументов получаем регулярное выражение
-        String word = wordAndFile.get(0);
+
 
         List<String> result = new LinkedList<>();
 
@@ -145,7 +145,7 @@ class Grep {
     private List<String> grepWord(List<String> lines) {
 
         // из массива аргументов получаем регулярное выражение
-        String word = wordAndFile.get(0);
+
 
         // в случае наличия флага игнорирования регистра переводим слово в нижний регистр
         if (fi)
