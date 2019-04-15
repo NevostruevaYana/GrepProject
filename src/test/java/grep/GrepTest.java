@@ -104,7 +104,7 @@ class GrepTest {
         System.setOut(new PrintStream(myOut));
 
         String[] args9 = {"dfg", "fgh", "src\\test\\java\\grep\\test"};
-        Main.main(args9); //should return "There should be 2 arguments: word file" message
+        Main.main(args9);
 
         final String standardOutput = myOut.toString();
         assertEquals(standardOutput, "");
@@ -115,8 +115,7 @@ class GrepTest {
         System.setOut(new PrintStream(myOut));
 
         String[] args10 = {"fgh", "src\\test\\java\\grep\\test.txt"};
-        Main.main(args10); //should return "The file path is invalid, the object C://Users//test.tt
-        // is not a file, or the file does not exist" message
+        Main.main(args10);
     }
 
     @Test
