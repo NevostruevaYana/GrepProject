@@ -27,7 +27,7 @@ class GrepTest {
     void test2() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args2 = {"src\\test\\java\\grep\\test"};
+        String[] args2 = {"src/test/java/grep/test"};
         Main.main(args2);
 
         final String standardOutput = myOut.toString();
@@ -39,7 +39,7 @@ class GrepTest {
     void test3() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args3 = {"rfr", "src\\test\\java\\grep\\test"};
+        String[] args3 = {"rfr", "src/test/java/grep/test"};
         Main.main(args3);
 
         final String standardOutput = myOut.toString();
@@ -50,7 +50,7 @@ class GrepTest {
     void test4() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args4 = {"-i", "rFr", "src\\test\\java\\grep\\test"};
+        String[] args4 = {"-i", "rFr", "src/test/java/grep/test"};
         Main.main(args4);
 
         final String standardOutput = myOut.toString();
@@ -61,7 +61,7 @@ class GrepTest {
     void test5() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args5 = {"-v", "-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
+        String[] args5 = {"-v", "-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args5);
 
         final String standardOutput = myOut.toString();
@@ -72,7 +72,7 @@ class GrepTest {
     void test6() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args6 = {"-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
+        String[] args6 = {"-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args6);
 
         final String standardOutput = myOut.toString();
@@ -81,9 +81,10 @@ class GrepTest {
 
     @Test
     void test7() {
+        System.out.println(System.getProperty("os.name"));
         System.setOut(new PrintStream(myOut));
 
-        String[] args7 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src\\test\\java\\grep\\test"};
+        String[] args7 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args7);
     }
 
@@ -91,7 +92,7 @@ class GrepTest {
     void test8() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args8 = {"-v", "sdg", "src\\test\\java\\grep\\test"};
+        String[] args8 = {"-v", "sdg", "src/test/java/grep/test"};
         Main.main(args8);
 
         final String standardOutput = myOut.toString();
@@ -103,7 +104,7 @@ class GrepTest {
     void test9() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args9 = {"dfg", "fgh", "src\\test\\java\\grep\\test"};
+        String[] args9 = {"dfg", "fgh", "src/test/java/grep/test"};
         Main.main(args9);
 
         final String standardOutput = myOut.toString();
@@ -114,7 +115,7 @@ class GrepTest {
     void test10() {
         System.setOut(new PrintStream(myOut));
 
-        String[] args10 = {"fgh", "src\\test\\java\\grep\\test.txt"};
+        String[] args10 = {"fgh", "src/test/java/grep/test.txt"};
         Main.main(args10);
     }
 

@@ -1,4 +1,4 @@
 *.xml
 !pom.xml
 
-git rm uiDesigner.xml
+$ git rm -cached uiDesigner.xml
