@@ -1,6 +1,5 @@
 *.xml
 !pom.xml
-$ echo '.idea' >> .gitignore
-$ git rm -r --cached .idea
-$ git add .gitignore
-$ git push
+git rm .idea
+git commit -m "remove .idea"
+git push origin branch_name
