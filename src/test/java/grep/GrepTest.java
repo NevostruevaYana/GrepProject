@@ -1,6 +1,7 @@
 package grep;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,131 +18,67 @@ class GrepTest {
     private ByteArrayOutputStream myOut = new ByteArrayOutputStream();
 
     @Test
-    void test1() throws IOException{
+    void test1() {
         String[] argsEmpty = {};
         Main.main(argsEmpty);
 
         final String standardOutput = myOut.toString();
 
-        StringWriter sw = new StringWriter();
-        BufferedWriter bw = new BufferedWriter(sw);
-        bw.write("Enter a string like : grep -flags([-r] - regex, \" +\n" +
-                "                \"[-i] - ignore case, [-v] - return lines that NOT matches) words file");
-        bw.newLine();
-        bw.flush();
-        System.out.print(sw.getBuffer());
-        sw.close();
-        bw.close();
-
         assertEquals(standardOutput, "Enter a string like : grep -flags([-r] - regex, " +
-                "[-i] - ignore case, [-v] - return lines that NOT matches) words file\r\n");
+                "[-i] - ignore case, [-v] - return lines that NOT matches) words file" + System.lineSeparator());
     }
 
     @Test
-    void test2() throws IOException{
+    void test2() {
         String[] args2 = {"src/test/java/grep/test"};
         Main.main(args2);
 
         final String standardOutput = myOut.toString();
 
-        StringWriter sw = new StringWriter();
-        BufferedWriter bw = new BufferedWriter(sw);
-        bw.write("Enter a string like : grep -flags([-r] - regex, \" +\n" +
-                "                \"[-i] - ignore case, [-v] - return lines that NOT matches) words file");
-        bw.newLine();
-        bw.flush();
-        System.out.print(sw.getBuffer());
-        sw.close();
-        bw.close();
-
         assertEquals(standardOutput, "Enter a string like : grep -flags([-r] - regex, " +
-                "[-i] - ignore case, [-v] - return lines that NOT matches) words file\r\n");
+                "[-i] - ignore case, [-v] - return lines that NOT matches) words file" + System.lineSeparator());
     }
 
     @Test
-    void test3() throws IOException{
+    void test3() {
         String[] args3 = {"rfr", "src/test/java/grep/test"};
         Main.main(args3);
 
         final String standardOutput = myOut.toString();
 
-        StringWriter sw = new StringWriter();
-        BufferedWriter bw = new BufferedWriter(sw);
-        bw.write("rfr sdg ghjkl");
-        bw.newLine();
-        bw.flush();
-        System.out.print(sw.getBuffer());
-        sw.close();
-        bw.close();
-
-        assertEquals(standardOutput, "rfr sdg ghjkl\r\n");
+        assertEquals(standardOutput, "rfr sdg ghjkl" + System.lineSeparator());
     }
 
     @Test
-    void test4() throws IOException {
+    void test4() {
         String[] args4 = {"-i", "rFr", "src/test/java/grep/test"};
         Main.main(args4);
 
         final String standardOutput = myOut.toString();
 
-        StringWriter sw = new StringWriter();
-        BufferedWriter bw = new BufferedWriter(sw);
-        bw.write("rfr sdg ghjkl");
-        bw.newLine();
-        bw.write("dxfghp RfR jkf");
-        bw.newLine();
-        bw.flush();
-        System.out.print(sw.getBuffer());
-        sw.close();
-        bw.close();
-
-        assertEquals(standardOutput, sw.toString());
+        assertEquals(standardOutput, "rfr sdg ghjkl" + System.lineSeparator() + "dxfghp RfR jkf" + System.lineSeparator());
     }
 
     @Test
-    void test5() throws IOException{
+    void test5() {
         String[] args5 = {"-v", "-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args5);
 
         final String standardOutput = myOut.toString();
 
-        StringWriter sw = new StringWriter();
-        BufferedWriter bw = new BufferedWriter(sw);
-        bw.write("zsd sdftsdv fbg");
-        bw.newLine();
-        bw.write("dftg");
-        bw.newLine();
-        bw.write("fgkfl rrr");
-        bw.newLine();
-        bw.flush();
-        System.out.print(sw.getBuffer());
-        sw.close();
-        bw.close();
-
-        assertEquals(standardOutput, "zsd sdftsdv fbg\r\ndftg\r\nfgkfl rrr\r\n");
+        assertEquals(standardOutput, "zsd sdftsdv fbg" + System.lineSeparator() +
+                "dftg" + System.lineSeparator() + "fgkfl rrr" + System.lineSeparator());
     }
 
     @Test
-    void test6() throws IOException{
+    void test6() {
         String[] args6 = {"-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args6);
 
         final String standardOutput = myOut.toString();
 
-        StringWriter sw = new StringWriter();
-        BufferedWriter bw = new BufferedWriter(sw);
-        bw.write("rfr sdg ghjkl");
-        bw.newLine();
-        bw.write("dxfghp RfR jkf");
-        bw.newLine();
-        bw.write("dsjnvkdv dvjnfdrfr");
-        bw.newLine();
-        bw.flush();
-        System.out.print(sw.getBuffer());
-        sw.close();
-        bw.close();
-
-        assertEquals(standardOutput, "rfr sdg ghjkl\r\ndxfghp RfR jkf\r\ndsjnvkdv dvjnfdrfr\r\n");
+        assertEquals(standardOutput, "rfr sdg ghjkl" + System.lineSeparator() + "dxfghp RfR jkf"
+                + System.lineSeparator() + "dsjnvkdv dvjnfdrfr" + System.lineSeparator());
     }
 
     @Test
@@ -158,8 +95,10 @@ class GrepTest {
         Main.main(args8);
 
         final String standardOutput = myOut.toString();
-        assertEquals(standardOutput, "zsd sdftsdv fbg\r\ndftg\r\ndxfghp RfR jkf" +
-                "\r\ndsjnvkdv dvjnfdrfr\r\nfgkfl rrr\r\n");
+
+        assertEquals(standardOutput, "zsd sdftsdv fbg" + System.lineSeparator() + "dftg" +
+                System.lineSeparator() + "dxfghp RfR jkf" + System.lineSeparator() + "dsjnvkdv dvjnfdrfr"
+                + System.lineSeparator() + "fgkfl rrr" + System.lineSeparator());
     }
 
     @Test
@@ -175,6 +114,7 @@ class GrepTest {
     void test10() {
         String[] args10 = {"fgh", "src/test/java/grep/test.txt"};
         Main.main(args10);
+
     }
 
     @Test

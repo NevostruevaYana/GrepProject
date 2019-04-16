@@ -82,7 +82,7 @@ class Grep {
 
         String inputFile = file;
         if (!new File(inputFile).exists() || !new File(inputFile).isFile())
-            throw new IllegalArgumentException("The file path is invalid, the object " +
+            System.out.println("The file path is invalid, the object " +
                     inputFile + " is not a file, or the file does not exist");
 
         List<String> result;
