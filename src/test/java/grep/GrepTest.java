@@ -22,9 +22,7 @@ class GrepTest {
         String[] argsEmpty = {};
         Main.main(argsEmpty);
 
-        final String standardOutput = myOut.toString();
-
-        assertEquals(standardOutput, "Enter a string like : grep -flags([-r] - regex, " +
+        assertEquals(myOut.toString(), "Enter a string like : grep -flags([-r] - regex, " +
                 "[-i] - ignore case, [-v] - return lines that NOT matches) words file" + System.lineSeparator());
     }
 
@@ -33,9 +31,7 @@ class GrepTest {
         String[] args2 = {"src/test/java/grep/test"};
         Main.main(args2);
 
-        final String standardOutput = myOut.toString();
-
-        assertEquals(standardOutput, "Enter a string like : grep -flags([-r] - regex, " +
+        assertEquals(myOut.toString(), "Enter a string like : grep -flags([-r] - regex, " +
                 "[-i] - ignore case, [-v] - return lines that NOT matches) words file" + System.lineSeparator());
     }
 
@@ -44,9 +40,7 @@ class GrepTest {
         String[] args3 = {"rfr", "src/test/java/grep/test"};
         Main.main(args3);
 
-        final String standardOutput = myOut.toString();
-
-        assertEquals(standardOutput, "rfr sdg ghjkl" + System.lineSeparator());
+        assertEquals(myOut.toString(), "rfr sdg ghjkl" + System.lineSeparator());
     }
 
     @Test
@@ -54,9 +48,7 @@ class GrepTest {
         String[] args4 = {"-i", "rFr", "src/test/java/grep/test"};
         Main.main(args4);
 
-        final String standardOutput = myOut.toString();
-
-        assertEquals(standardOutput, "rfr sdg ghjkl" + System.lineSeparator() + "dxfghp RfR jkf" + System.lineSeparator());
+        assertEquals(myOut.toString(), "rfr sdg ghjkl" + System.lineSeparator() + "dxfghp RfR jkf" + System.lineSeparator());
     }
 
     @Test
@@ -64,9 +56,7 @@ class GrepTest {
         String[] args5 = {"-v", "-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args5);
 
-        final String standardOutput = myOut.toString();
-
-        assertEquals(standardOutput, "zsd sdftsdv fbg" + System.lineSeparator() +
+        assertEquals(myOut.toString(), "zsd sdftsdv fbg" + System.lineSeparator() +
                 "dftg" + System.lineSeparator() + "fgkfl rrr" + System.lineSeparator());
     }
 
@@ -75,16 +65,12 @@ class GrepTest {
         String[] args6 = {"-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args6);
 
-        final String standardOutput = myOut.toString();
-
-        assertEquals(standardOutput, "rfr sdg ghjkl" + System.lineSeparator() + "dxfghp RfR jkf"
+        assertEquals(myOut.toString(), "rfr sdg ghjkl" + System.lineSeparator() + "dxfghp RfR jkf"
                 + System.lineSeparator() + "dsjnvkdv dvjnfdrfr" + System.lineSeparator());
     }
 
     @Test
     void test7() {
-        System.out.println(System.getProperty("os.name"));
-
         String[] args7 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args7);
     }
@@ -94,9 +80,7 @@ class GrepTest {
         String[] args8 = {"-v", "sdg", "src/test/java/grep/test"};
         Main.main(args8);
 
-        final String standardOutput = myOut.toString();
-
-        assertEquals(standardOutput, "zsd sdftsdv fbg" + System.lineSeparator() + "dftg" +
+        assertEquals(myOut.toString(), "zsd sdftsdv fbg" + System.lineSeparator() + "dftg" +
                 System.lineSeparator() + "dxfghp RfR jkf" + System.lineSeparator() + "dsjnvkdv dvjnfdrfr"
                 + System.lineSeparator() + "fgkfl rrr" + System.lineSeparator());
     }
@@ -106,8 +90,7 @@ class GrepTest {
         String[] args9 = {"dfg", "fgh", "src/test/java/grep/test"};
         Main.main(args9);
 
-        final String standardOutput = myOut.toString();
-        assertEquals(standardOutput, "");
+        assertEquals("", myOut.toString());
     }
 
     @Test
