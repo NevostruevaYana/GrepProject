@@ -1,5 +1,6 @@
 *.xml
 !pom.xml
-target/
-out/
-.idea/
+$ echo '.idea' >> .gitignore
+$ git rm -r --cached .idea
+$ git add .gitignore
+$ git push
