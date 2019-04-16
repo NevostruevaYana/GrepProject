@@ -2,6 +2,7 @@ package grep;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -9,12 +10,15 @@ import java.io.PrintStream;
 
 class GrepTest {
 
+    @BeforeEach
+    void before(){
+        System.setOut(new PrintStream(myOut));
+    }
+
     private ByteArrayOutputStream myOut = new ByteArrayOutputStream();
 
     @Test
     void test1() {
-        System.setOut(new PrintStream(myOut));
-
         String[] argsEmpty = {};
         Main.main(argsEmpty);
 
@@ -25,8 +29,6 @@ class GrepTest {
 
     @Test
     void test2() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args2 = {"src/test/java/grep/test"};
         Main.main(args2);
 
@@ -37,8 +39,6 @@ class GrepTest {
 
     @Test
     void test3() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args3 = {"rfr", "src/test/java/grep/test"};
         Main.main(args3);
 
@@ -48,8 +48,6 @@ class GrepTest {
 
     @Test
     void test4() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args4 = {"-i", "rFr", "src/test/java/grep/test"};
         Main.main(args4);
 
@@ -59,8 +57,6 @@ class GrepTest {
 
     @Test
     void test5() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args5 = {"-v", "-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args5);
 
@@ -70,8 +66,6 @@ class GrepTest {
 
     @Test
     void test6() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args6 = {"-r", "(\\S*\\s*)*(j)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args6);
 
@@ -82,7 +76,6 @@ class GrepTest {
     @Test
     void test7() {
         System.out.println(System.getProperty("os.name"));
-        System.setOut(new PrintStream(myOut));
 
         String[] args7 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args7);
@@ -90,8 +83,6 @@ class GrepTest {
 
     @Test
     void test8() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args8 = {"-v", "sdg", "src/test/java/grep/test"};
         Main.main(args8);
 
@@ -102,8 +93,6 @@ class GrepTest {
 
     @Test
     void test9() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args9 = {"dfg", "fgh", "src/test/java/grep/test"};
         Main.main(args9);
 
@@ -113,16 +102,12 @@ class GrepTest {
 
     @Test
     void test10() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args10 = {"fgh", "src/test/java/grep/test.txt"};
         Main.main(args10);
     }
 
     @Test
     void test11() {
-        System.setOut(new PrintStream(myOut));
-
         String[] args11 = {"fgh", "null"};
         Main.main(args11); //should return "The file path is invalid, the object null
         // is not a file, or the file does not exist" message
