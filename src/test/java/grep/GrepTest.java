@@ -1,7 +1,6 @@
 package grep;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,12 +9,14 @@ import java.io.*;
 
 class GrepTest {
 
+    private ByteArrayOutputStream myOut = new ByteArrayOutputStream();
+    private ByteArrayOutputStream errOut = new ByteArrayOutputStream();
+
     @BeforeEach
     void before(){
         System.setOut(new PrintStream(myOut));
+        System.setErr(new PrintStream(errOut));
     }
-
-    private ByteArrayOutputStream myOut = new ByteArrayOutputStream();
 
     @Test
     void test1() {
@@ -73,6 +74,8 @@ class GrepTest {
     void test7() {
         String[] args7 = {"-i", "-r", "^(d)(\\S*\\s*)*", "src/test/java/grep/test"};
         Main.main(args7);
+
+        assertEquals(errOut.toString(),"option \"-r\" cannot be used with the option(s) [-i]" + System.lineSeparator());
     }
 
     @Test
@@ -90,7 +93,7 @@ class GrepTest {
         String[] args9 = {"dfg", "fgh", "src/test/java/grep/test"};
         Main.main(args9);
 
-        assertEquals("", myOut.toString());
+        assertEquals(errOut.toString(),"Too many arguments: src/test/java/grep/test" + System.lineSeparator());
     }
 
     @Test
@@ -98,11 +101,14 @@ class GrepTest {
         String[] args10 = {"fgh", "src/test/java/grep/test.txt"};
         Main.main(args10);
 
+        assertEquals(errOut.toString(),"src\\test\\java\\grep\\test.txt (Не удается найти указанный файл)" + System.lineSeparator());
     }
 
     @Test
     void test11() {
         String[] args11 = {"fgh", "null"};
         Main.main(args11);
+
+        assertEquals(errOut.toString(),"null (Не удается найти указанный файл)" + System.lineSeparator());
     }
 }

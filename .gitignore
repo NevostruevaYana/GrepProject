@@ -1,5 +1,2 @@
 *.xml
 !pom.xml
-git rm .idea
-git commit -m "remove .idea"
-git push origin branch_name
